@@ -1,16 +1,6 @@
 public class LinkedList {
     private Node head;
 
-    private class Node {
-        Barang data;
-        Node next;
-
-        Node(Barang data) {
-            this.data = data;
-            this.next = null;
-        }
-    }
-
     public void tambah(Barang barang) {
         Node newNode = new Node(barang);
         if (head == null) {
