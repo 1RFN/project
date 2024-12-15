@@ -1,0 +1,56 @@
+[33mcommit 107b93d98f08b1b0605db396438fe4101ddf952a[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m
+Author: zahratusyita <zahraaraa688@gmail.com>
+Date:   Sun Dec 15 09:21:08 2024 +0800
+
+    linkedlist
+
+[1mdiff --git a/LinkedList.java b/LinkedList.java[m
+[1mindex 33223b0..2f4c471 100644[m
+[1m--- a/LinkedList.java[m
+[1m+++ b/LinkedList.java[m
+[36m@@ -1,3 +1,44 @@[m
+ public class LinkedList {[m
+[31m-    [m
+[32m+[m[32m    private Node head;[m
+[32m+[m
+[32m+[m[32m    private class Node {[m
+[32m+[m[32m        Barang data;[m
+[32m+[m[32m        Node next;[m
+[32m+[m
+[32m+[m[32m        Node(Barang data) {[m
+[32m+[m[32m            this.data = data;[m
+[32m+[m[32m            this.next = null;[m
+[32m+[m[32m        }[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    public void add(Barang barang) {[m
+[32m+[m[32m        Node newNode = new Node(barang);[m
+[32m+[m[32m        if (head == null) {[m
+[32m+[m[32m            head = newNode;[m
+[32m+[m[32m        } else {[m
+[32m+[m[32m            Node current = head;[m
+[32m+[m[32m            while (current.next != null) {[m
+[32m+[m[32m                current = current.next;[m
+[32m+[m[32m            }[m
+[32m+[m[32m            current.next = newNode;[m
+[32m+[m[32m        }[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    public void remove(String id) {[m
+[32m+[m[32m        if (head == null) {[m
+[32m+[m[32m            return;[m
+[32m+[m[32m        }[m
+[32m+[m[32m        if (head.data.id.equals(id)) {[m
+[32m+[m[32m            head = head.next;[m
+[32m+[m[32m            return;[m
+[32m+[m[32m        }[m
+[32m+[m[32m        Node current = head;[m
+[32m+[m[32m        while (current.next != null) {[m
+[32m+[m[32m            if (current.next.data.id.equals(id)) {[m
+[32m+[m[32m                current.next = current.next.next;[m
+[32m+[m[32m                return;[m
+[32m+[m[32m            }[m
+[32m+[m[32m            current = current.next;[m
+[32m+[m[32m        }[m
+[32m+[m[32m    }[m
+ }[m
