@@ -10,9 +10,10 @@ public class Queue {
         rear.next = newNode;
         rear = newNode;
     }
+
     Barang dequeue() {
         if (front == null) return null;
-        Barang barang = front.barang;
+        Barang barang = front.data;
         front = front.next;
         if (front == null) rear = null;
         return barang;
