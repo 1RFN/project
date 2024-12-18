@@ -5,6 +5,12 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         LinkedList list = new LinkedList();
         Stack riwayatStack = new Stack();
+        Tree tree = new Tree();
+
+        tree.insertKategori("Elektronik");
+        tree.insertKategori("Furniture");
+        tree.insertKategori("Alat Tulis");
+        tree.insertKategori("Aksesoris");
 
         list.tambah(new Barang("B001", "Laptop", "Elektronik", 10, 7000000));
         list.tambah(new Barang("B002", "Meja Kantor", "Furniture", 5, 1500000));

@@ -49,13 +49,13 @@ public class Stack {
             return;
         }
         Node current = top;
-        System.out.println("Riwayat Pengiriman atau Penerimaan Barang ");
+        System.out.println("Riwayat Pengiriman dan Penerimaan Barang ");
         while(current != null){
             System.out.println("ID: " + current.data.id + ", nama: " + current.data.nama + 
             ", kategori: " + current.data.kategori + 
             ", jumlah stok: " + current.data.jumlah_stok +
             ", Harga Satuan: " + current.data.harga_satuan);
-            current = current.next;          
+            current = current.next;       
         }
     }
 } 
