@@ -3,9 +3,12 @@ import java.util.Scanner;
 public class Main {
      static Scanner scanner = new Scanner(System.in);
      static LinkedList barangList = new LinkedList();
+     static Stack riwayatStack = new Stack();
     public static void main(String[] args) {
         
         Tree tree = new Tree();
+       
+
         tree.insertKategori("Elektronik");
         tree.insertKategori("Furniture");
         tree.insertKategori("Alat Tulis");
@@ -178,7 +181,38 @@ public class Main {
         System.out.println("\n===========================");
         System.out.println("     PENGIRIMAN BARANG");
         System.out.println("===========================");
-        // Implementasi pengiriman barang bisa ditambahkan disini.
+        System.out.println("===========================");
+        System.out.println("1. Buat Pengiriman Barang");
+        System.out.println("2. Riwayat Pengirirman Barang");
+        System.out.println("3. Cari Pengiriman Berdasarkan ID");
+        System.out.println("4. Kembali");
+        System.out.println("===========================");
+        System.out.print("Pilih menu: ");
+        int choice = scanner.nextInt();
+        scanner.nextLine(); // consume newline
+        switch (choice) {
+            case 1:
+            System.out.print("Masukkan ID Barang yang dikirim: ");
+            String idKirim = scanner.nextLine();
+            Barang barangKirim = barangList.searchById(idKirim);
+            if (barangKirim != null && barangKirim.jumlah_stok > 0) {
+                barangKirim.jumlah_stok--; 
+                riwayatStack.push(barangKirim); 
+                System.out.println("Barang " + barangKirim.nama + " berhasil dikirim.");
+            } else {
+                System.out.println("Barang tidak tersedia atau stok tidak cukup.");
+            }
+            break;
+            case 2:
+            riwayatStack.tampilkan();
+                break;
+            case 3:
+                return;
+            case 4:
+                return; 
+            default:
+                System.out.println("Pilihan tidak valid, coba lagi.");
+        }
     }
 
     private static void penerimaanBarang() {
