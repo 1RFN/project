@@ -1,5 +1,6 @@
 public class LinkedList {
     private Node head;
+    private boolean isSorted = false;
 
     public void tambah(Barang barang) {
         Node newNode = new Node(barang);
@@ -43,6 +44,55 @@ public class LinkedList {
         tambah(barang);
     }
 
+    public void update(String id, String field, Object newValue) {
+        Node current = head;
+    
+        while (current != null) {
+            if (current.data.id.equals(id)) {
+                switch (field.toLowerCase()) {
+                    case "nama":
+                        if (newValue instanceof String) {
+                            System.out.println("Nama Barang Lama  : " + current.data.nama);
+                            current.data.nama = (String) newValue;
+                            System.out.println("Nama Barang Baru  : " + current.data.nama);
+                            System.out.println("Nama barang berhasil diubah!");
+                        } else {
+                            System.out.println("inputan salah ulangi lagi");
+                        }
+                        break;
+                    case "stok":
+                        if (newValue instanceof Integer) {
+                            System.out.println("Stok Lama         : " + current.data.jumlah_stok);
+                            current.data.jumlah_stok = (int) newValue;
+                            System.out.println("Stok Baru         : " + current.data.jumlah_stok);
+                            System.out.println("Stok barang berhasil diubah!");
+                        } else {
+                            System.out.println("inputan salah ulangi lagi");
+                        }
+                        break;
+                    case "tanggal":
+                        if (newValue instanceof String) {
+                            System.out.println("Tanggal Diterima Lama: " + current.data.tanggal_diterima);
+                            current.data.tanggal_diterima = (String) newValue;
+                            System.out.println("Tanggal Diterima Baru: " + current.data.tanggal_diterima);
+                            System.out.println("Tanggal diterima berhasil diubah!");
+                        } else {
+                            System.out.println("inputan salah ulangi lagi");
+                        }
+                        break;
+                    default:
+                        System.out.println("Field tidak valid! Gunakan 'nama', 'stok', atau 'tanggal'.");
+                        return;
+                }
+                return;
+            }
+            current = current.next;
+        }
+    
+        System.out.println("ID Barang tidak ditemukan.");
+    }
+    
+
     public void tampilkan() {
         Node current = head;
         while (current != null) {
@@ -53,7 +103,7 @@ public class LinkedList {
             current = current.next;
         }
     }
-
+    
     public void sortById() {
         if (head == null || head.next == null) {
             return;
@@ -115,4 +165,5 @@ public class LinkedList {
         }
         return size;
     }
+    
 }
