@@ -4,7 +4,8 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         LinkedList list = new LinkedList();
-        
+        Stack riwayatStack = new Stack();
+
         list.tambah(new Barang("B001", "Laptop", "Elektronik", 10, 7000000));
         list.tambah(new Barang("B002", "Meja Kantor", "Furniture", 5, 1500000));
         list.tambah(new Barang("B003", "Buku Tulis", "Alat Tulis", 50, 8000));
@@ -22,8 +23,11 @@ public class Main {
             System.out.println("2. Hapus Barang");
             System.out.println("3. Lihat Barang");
             System.out.println("4. Cari Barang");
-            System.out.println("5. sortir Barang");
-            System.out.println("6. Keluar");
+            System.out.println("5. Sortir Barang");
+            System.out.println("6. Pengiriman Barang");
+            System.out.println("7. Penerimaan Barang");
+            System.out.println("8. Lihat Riwayat");
+            System.out.println("9. Keluar");
             System.out.print("Pilih opsi: ");
             
             int pilihan = scanner.nextInt();
@@ -73,9 +77,39 @@ public class Main {
                 
                 case 5:
                     list.sortById();
-                    break;    
+                    break; 
+            
+                case 6: 
+                    System.out.print("Masukkan ID Barang yang dikirim: ");
+                    String idKirim = scanner.nextLine();
+                    Barang barangKirim = list.searchById(idKirim);
+                    if (barangKirim != null && barangKirim.jumlah_stok > 0) {
+                        barangKirim.jumlah_stok--; 
+                        riwayatStack.push(barangKirim); 
+                        System.out.println("Barang " + barangKirim.nama + " berhasil dikirim.");
+                    } else {
+                        System.out.println("Barang tidak tersedia atau stok tidak cukup.");
+                    }
+                    break;
 
-                case 6:
+                case 7: 
+                    System.out.print("Masukkan ID Barang yang diterima: ");
+                    String idTerima = scanner.nextLine();
+                    Barang barangTerima = list.searchById(idTerima);
+                    if (barangTerima != null) {
+                        barangTerima.jumlah_stok++; 
+                        riwayatStack.push(barangTerima); 
+                        System.out.println("Barang " + barangTerima.nama + " berhasil diterima.");
+                    } else {
+                        System.out.println("Barang tidak ditemukan.");
+                    }
+                    break;
+
+                case 8: 
+                    riwayatStack.tampilkan();
+                    break;
+
+                case 9:
                     System.out.println("Keluar dari program. Terima kasih!");
                     scanner.close();
                     return;

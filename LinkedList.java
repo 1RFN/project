@@ -104,7 +104,18 @@ public class LinkedList {
         }
         return array;
     }
-    
+
+    public Barang searchById(String id) {
+        Node current = head;
+        while (current != null) {
+            if (current.data.id.equals(id)) {
+                return current.data;
+            }
+            current = current.next;
+        }
+        return null;
+    }
+
     public int getSize() {
         int size = 0;
         Node current = head;
@@ -114,5 +125,4 @@ public class LinkedList {
         }
         return size;
     }
-    
 }
