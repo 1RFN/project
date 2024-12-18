@@ -6,7 +6,7 @@ public class Barang {
     int harga_satuan;
     String tanggal_diterima;
     
-    Barang(String id, String nama, String kategori, int jumlah_stok, int harga_satuan) {
+    Barang(String id, String nama, String kategori, int jumlah_stok, int harga_satuan, String tanggal_diterima) {
         this.id = id;
         this.nama = nama;
         this.kategori = kategori;

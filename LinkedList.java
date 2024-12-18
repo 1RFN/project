@@ -94,14 +94,18 @@ public class LinkedList {
     
 
     public void tampilkan() {
+        System.out.printf("+------------+------------------+------------+----------------+------------------+\n");
+        System.out.printf("| ID Barang | Nama Barang      | Stok Barang | Harga Per Unit | Tanggal Diterima |\n");
+        System.out.printf("+------------+------------------+------------+----------------+------------------+\n");
+
         Node current = head;
         while (current != null) {
-            System.out.println("ID: " + current.data.id + ", Nama: " + current.data.nama + 
-                               ", Kategori: " + current.data.kategori + 
-                               ", Jumlah Stok: " + current.data.jumlah_stok + 
-                               ", Harga Satuan: " + current.data.harga_satuan);
+            System.out.printf("| %-10s | %-16s | %-10d | %-14d | %-16s |\n",
+                    current.data.id, current.data.nama, current.data.jumlah_stok,
+                    current.data.harga_satuan, current.data.tanggal_diterima);
             current = current.next;
         }
+        System.out.printf("+------------+------------------+------------+----------------+------------------+\n");
     }
     
     public void sortById() {
