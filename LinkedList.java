@@ -1,3 +1,5 @@
+import java.util.NoSuchElementException;
+
 public class LinkedList {
     private Node head;
     private boolean isSorted = false;
@@ -45,52 +47,43 @@ public class LinkedList {
     }
 
     public void update(String id, String field, Object newValue) {
-        Node current = head;
-    
-        while (current != null) {
-            if (current.data.id.equals(id)) {
-                switch (field.toLowerCase()) {
-                    case "nama":
-                        if (newValue instanceof String) {
-                            System.out.println("Nama Barang Lama  : " + current.data.nama);
-                            current.data.nama = (String) newValue;
-                            System.out.println("Nama Barang Baru  : " + current.data.nama);
-                            System.out.println("Nama barang berhasil diubah!");
-                        } else {
-                            System.out.println("inputan salah ulangi lagi");
-                        }
-                        break;
-                    case "stok":
-                        if (newValue instanceof Integer) {
-                            System.out.println("Stok Lama         : " + current.data.jumlah_stok);
-                            current.data.jumlah_stok = (int) newValue;
-                            System.out.println("Stok Baru         : " + current.data.jumlah_stok);
-                            System.out.println("Stok barang berhasil diubah!");
-                        } else {
-                            System.out.println("inputan salah ulangi lagi");
-                        }
-                        break;
-                    case "tanggal":
-                        if (newValue instanceof String) {
-                            System.out.println("Tanggal Diterima Lama: " + current.data.tanggal_diterima);
-                            current.data.tanggal_diterima = (String) newValue;
-                            System.out.println("Tanggal Diterima Baru: " + current.data.tanggal_diterima);
-                            System.out.println("Tanggal diterima berhasil diubah!");
-                        } else {
-                            System.out.println("inputan salah ulangi lagi");
-                        }
-                        break;
-                    default:
-                        System.out.println("Field tidak valid! Gunakan 'nama', 'stok', atau 'tanggal'.");
-                        return;
-                }
-                return;
+    Node current = head;
+
+    while (current != null) {
+        if (current.data.id.equals(id)) {
+            switch (field.toLowerCase()) {
+                case "nama":
+                    if (newValue instanceof String) {
+                        current.data.nama = (String) newValue;
+                    } else {
+                        throw new IllegalArgumentException("Inputan salah, ulangi dengan nilai yang benar.");
+                    }
+                    break;
+                case "stok":
+                    if (newValue instanceof Integer) {
+                        current.data.jumlah_stok = (int) newValue;
+                    } else {
+                        throw new IllegalArgumentException("Inputan salah, ulangi dengan nilai yang benar.");
+                    }
+                    break;
+                case "tanggal":
+                    if (newValue instanceof String) {
+                        current.data.tanggal_diterima = (String) newValue;
+                    } else {
+                        throw new IllegalArgumentException("Inputan salah, ulangi dengan nilai yang benar.");
+                    }
+                    break;
+                default:
+                    throw new IllegalArgumentException("Field tidak valid! Gunakan 'nama', 'stok', atau 'tanggal'.");
             }
-            current = current.next;
+            return;
         }
-    
-        System.out.println("ID Barang tidak ditemukan.");
+        current = current.next;
     }
+
+    throw new NoSuchElementException("ID Barang tidak ditemukan.");
+}
+
     
 
     public void tampilkan() {

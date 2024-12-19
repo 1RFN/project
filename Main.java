@@ -1,3 +1,4 @@
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class Main {
@@ -83,7 +84,7 @@ public class Main {
                     tambahBarang();
                     break;
                 case 2:
-                    // editBarang();
+                    editBarang();
                     break;
                 case 3:
                     hapusBarang();
@@ -114,22 +115,41 @@ public class Main {
         barangList.tambah(new Barang(id, nama, kategori, stok, harga, tanggal));
         System.out.println("Barang berhasil ditambahkan.");
     }
-
-    // private static void editBarang() {
-    //     System.out.print("Masukkan ID Barang yang akan diedit: ");
-    //     String id = scanner.nextLine();
-    //     System.out.print("Masukkan Nama Barang Baru: ");
-    //     String nama = scanner.nextLine();
-    //     System.out.print("Masukkan Stok Baru: ");
-    //     int stok = scanner.nextInt();
-    //     System.out.print("Masukkan Harga Baru: ");
-    //     int harga = scanner.nextInt();
-    //     scanner.nextLine(); // consume newline
-    //     System.out.print("Masukkan Tanggal Diterima Baru: ");
-    //     String tanggal = scanner.nextLine();
-
-    //     barangList.update(id, nama, stok, harga, tanggal);
-    // }
+    private static void editBarang() {
+        System.out.print("Masukkan ID Barang yang akan diedit: ");
+        String id = scanner.nextLine();
+    
+        System.out.print("Masukkan Field yang akan diedit (nama, stok, tanggal): ");
+        String field = scanner.nextLine();
+    
+        Object newValue;
+        switch (field.toLowerCase()) {
+            case "nama":
+                System.out.print("Masukkan Nama Barang Baru: ");
+                newValue = scanner.nextLine();
+                break;
+            case "stok":
+                System.out.print("Masukkan Stok Baru: ");
+                newValue = scanner.nextInt();
+                scanner.nextLine(); // consume newline
+                break;
+            case "tanggal":
+                System.out.print("Masukkan Tanggal Diterima Baru: ");
+                newValue = scanner.nextLine();
+                break;
+            default:
+                System.out.println("Field tidak valid. Silakan coba lagi.");
+                return;
+        }
+        try {
+            barangList.update(id, field, newValue);
+            System.out.println("Barang berhasil diperbarui.");
+        } catch (IllegalArgumentException e) {
+            System.out.println("Error: " + e.getMessage());
+        } catch (NoSuchElementException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
 
     private static void hapusBarang() {
         System.out.print("Masukkan ID Barang yang akan dihapus: ");
