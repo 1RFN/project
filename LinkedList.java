@@ -1,5 +1,3 @@
-import java.util.NoSuchElementException;
-
 public class LinkedList {
     private Node head;
     private boolean isSorted = false;
@@ -34,6 +32,7 @@ public class LinkedList {
             current = current.next;
         }
     }
+
     public void terima(Barang barang) {
         Node current = head;
         while (current != null) {
@@ -47,44 +46,42 @@ public class LinkedList {
     }
 
     public void update(String id, String field, Object newValue) {
-    Node current = head;
+        Node current = head;
 
-    while (current != null) {
-        if (current.data.id.equals(id)) {
-            switch (field.toLowerCase()) {
-                case "nama":
-                    if (newValue instanceof String) {
-                        current.data.nama = (String) newValue;
-                    } else {
-                        throw new IllegalArgumentException("Inputan salah, ulangi dengan nilai yang benar.");
-                    }
-                    break;
-                case "stok":
-                    if (newValue instanceof Integer) {
-                        current.data.jumlah_stok = (int) newValue;
-                    } else {
-                        throw new IllegalArgumentException("Inputan salah, ulangi dengan nilai yang benar.");
-                    }
-                    break;
-                case "tanggal":
-                    if (newValue instanceof String) {
-                        current.data.tanggal_diterima = (String) newValue;
-                    } else {
-                        throw new IllegalArgumentException("Inputan salah, ulangi dengan nilai yang benar.");
-                    }
-                    break;
-                default:
-                    throw new IllegalArgumentException("Field tidak valid! Gunakan 'nama', 'stok', atau 'tanggal'.");
+        while (current != null) {
+            if (current.data.id.equals(id)) {
+                switch (field.toLowerCase()) {
+                    case "nama":
+                        if (newValue instanceof String) {
+                            current.data.nama = (String) newValue;
+                        } else {
+                            throw new IllegalArgumentException("Inputan salah, ulangi dengan nilai yang benar.");
+                        }
+                        break;
+                    case "stok":
+                        if (newValue instanceof Integer) {
+                            current.data.jumlah_stok = (int) newValue;
+                        } else {
+                            throw new IllegalArgumentException("Inputan salah, ulangi dengan nilai yang benar.");
+                        }
+                        break;
+                    case "tanggal":
+                        if (newValue instanceof String) {
+                            current.data.tanggal_diterima = (String) newValue;
+                        } else {
+                            throw new IllegalArgumentException("Inputan salah, ulangi dengan nilai yang benar.");
+                        }
+                        break;
+                    default:
+                        throw new IllegalArgumentException("Field tidak valid! Gunakan 'nama', 'stok', atau 'tanggal'.");
+                }
+                return;
             }
-            return;
+            current = current.next;
         }
-        current = current.next;
+
+        throw new RuntimeException("ID Barang tidak ditemukan.");
     }
-
-    throw new NoSuchElementException("ID Barang tidak ditemukan.");
-}
-
-    
 
     public void tampilkan() {
         System.out.printf("+------------+------------------+------------+----------------+------------------+\n");
@@ -100,7 +97,7 @@ public class LinkedList {
         }
         System.out.printf("+------------+------------------+------------+----------------+------------------+\n");
     }
-    
+
     public void sortById() {
         if (head == null || head.next == null) {
             return;
@@ -110,7 +107,7 @@ public class LinkedList {
             swapped = false;
             Node current = head;
             while (current.next != null) {
-                if (current.data.id.compareTo(current.next.data.id) > 0) { 
+                if (current.data.id.compareTo(current.next.data.id) > 0) {
                     Barang temp = current.data;
                     current.data = current.next.data;
                     current.next.data = temp;
@@ -122,26 +119,25 @@ public class LinkedList {
         isSorted = true;
         System.out.println("List berhasil diurutkan berdasarkan ID.");
     }
-    
+
     public Barang binarySearchById(String id) {
-       
         sortById();
         int left = 0, right = getSize() - 1;
-        Node[] nodes = toArray(); 
+        Node[] nodes = toArray();
         while (left <= right) {
             int mid = (left + right) / 2;
             int compare = nodes[mid].data.id.compareTo(id);
             if (compare == 0) {
-                return nodes[mid].data; 
+                return nodes[mid].data;
             } else if (compare < 0) {
-                left = mid + 1; 
+                left = mid + 1;
             } else {
-                right = mid - 1; 
+                right = mid - 1;
             }
         }
-        return null; 
+        return null;
     }
-    
+
     private Node[] toArray() {
         int size = getSize();
         Node[] array = new Node[size];
