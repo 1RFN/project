@@ -13,7 +13,7 @@ public class Main {
         tree.insertKategori("Furniture");
         tree.insertKategori("Alat Tulis");
         tree.insertKategori("Aksesoris");
-
+        
         /* 
         barangList.tambah(new Barang("A001", "Laptop", "Elektronik", 10, 7000000, "2024-12-01"));
         barangList.tambah(new Barang("B002", "Meja Kantor", "Furniture", 5, 1500000, "2024-12-01"));
@@ -36,7 +36,7 @@ public class Main {
         tree.tambahBarang("Alat Tulis", new Barang("C008", "Whiteboard", "Alat Tulis", 3, 350000, "2024-12-01"));
         tree.tambahBarang("Elektronik", new Barang("A009", "Kabel HDMI", "Elektronik", 20, 75000, "2024-12-01"));
         tree.tambahBarang("Aksesoris", new Barang("D010", "Headset", "Aksesoris", 12, 300000, "2024-12-01"));
-
+        
         while (true) {
             showMainMenu();
             int choice = scanner.nextInt();
@@ -128,6 +128,7 @@ public class Main {
         tree.tambahBarang(kategori, barang);
         System.out.println("Barang berhasil ditambahkan.");
     }
+    
     private static void editBarang() {
         System.out.print("Masukkan ID Barang yang akan diedit: ");
         String id = scanner.nextLine();
