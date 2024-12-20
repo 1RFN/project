@@ -5,9 +5,8 @@ public class Main {
      static Scanner scanner = new Scanner(System.in);
      static LinkedList barangList = new LinkedList();
      static Stack riwayatStack = new Stack();
+     static Tree tree = new Tree();
     public static void main(String[] args) {
-        
-        Tree tree = new Tree();
        
 
         tree.insertKategori("Elektronik");
@@ -25,8 +24,8 @@ public class Main {
         barangList.tambah(new Barang("B008", "Whiteboard", "Alat Tulis", 3, 350000, "2024-12-01"));
         barangList.tambah(new Barang("B009", "Kabel HDMI", "Elektronik", 20, 75000, "2024-12-01"));
         barangList.tambah(new Barang("B010", "Headset", "Aksesoris", 12, 300000, "2024-12-01"));
-
-
+        
+       
         while (true) {
             showMainMenu();
             int choice = scanner.nextInt();
@@ -41,10 +40,10 @@ public class Main {
                 case 3:
                     pengirimanBarang();
                     break;
+                // case 4:
+                //     penerimaanBarang();
+                //     break;
                 case 4:
-                    penerimaanBarang();
-                    break;
-                case 5:
                     System.out.println("Terima kasih! Anda telah keluar.");
                     return;
                 default:
@@ -102,7 +101,7 @@ public class Main {
         String id = scanner.nextLine();
         System.out.print("Masukkan Nama Barang: ");
         String nama = scanner.nextLine();
-        System.out.print("Masukkan Kaetgori Barang: ");
+        System.out.print("Masukkan Kategori Barang: ");
         String kategori = scanner.nextLine();
         System.out.print("Masukkan Stok Barang: ");
         int stok = scanner.nextInt();
@@ -112,7 +111,10 @@ public class Main {
         System.out.print("Masukkan Tanggal Diterima (yyyy-mm-dd): ");
         String tanggal = scanner.nextLine();
 
-        barangList.tambah(new Barang(id, nama, kategori, stok, harga, tanggal));
+        Barang barang = new Barang(id, nama, kategori, stok, harga, tanggal);
+
+        barangList.tambah(barang);
+        tree.tambahBarang(kategori, barang);
         System.out.println("Barang berhasil ditambahkan.");
     }
     private static void editBarang() {
@@ -162,7 +164,7 @@ public class Main {
             System.out.println("\n===========================");
             System.out.println("    LIHAT DAFTAR BARANG");
             System.out.println("===========================");
-            barangList.tampilkan();
+            tree.display();
             System.out.println("===========================");
             System.out.println("1. Sortir Barang");
             System.out.println("2. Cari Barang");
@@ -209,8 +211,8 @@ public class Main {
             System.out.println("===========================");
             System.out.println("1. Buat Pengiriman Barang");
             System.out.println("2. Riwayat Pengirirman Barang");
-            System.out.println("3. Cari Pengiriman Berdasarkan ID");
-            System.out.println("4. Kembali");
+            // System.out.println("3. Cari Pengiriman Berdasarkan ID");
+            System.out.println("3. Kembali");
             System.out.println("===========================");
             System.out.print("Pilih menu: ");
             int choice = scanner.nextInt();
@@ -243,32 +245,32 @@ public class Main {
         
     }
 
-   private static void penerimaanBarang() {
-         while (true) {
-            System.out.println("\n===========================");
-            System.out.println("     PENERIMAAN BARANG");
-            System.out.println("===========================");
-            System.out.println("===========================");
-            System.out.println("1. Tambah Barang Masuk");
-            System.out.println("2. Riwayat penerimaan Barang");
-            System.out.println("3. Kembali");
-            System.out.println("===========================");
-            System.out.print("Pilih menu: ");
-            int choice = scanner.nextInt();
-            scanner.nextLine(); 
-            switch (choice) {
-                case 1:
-                    tambahBarang();
-                    break;
-                case 2:
-                    break;
-                case 3:
-                    return;
-                default:
-                    System.out.println("Pilihan tidak valid, coba lagi.");
-            }
-        }
+//    private static void penerimaanBarang() {
+//          while (true) {
+//             System.out.println("\n===========================");
+//             System.out.println("     PENERIMAAN BARANG");
+//             System.out.println("===========================");
+//             System.out.println("===========================");
+//             System.out.println("1. Tambah Barang Masuk");
+//             System.out.println("2. Riwayat penerimaan Barang");
+//             System.out.println("3. Kembali");
+//             System.out.println("===========================");
+//             System.out.print("Pilih menu: ");
+//             int choice = scanner.nextInt();
+//             scanner.nextLine(); 
+//             switch (choice) {
+//                 case 1:
+//                     tambahBarang();
+//                     break;
+//                 case 2:
+//                     break;
+//                 case 3:
+//                     return;
+//                 default:
+//                     System.out.println("Pilihan tidak valid, coba lagi.");
+//             }
+//         }
        
-    }
+//     }
 }
 

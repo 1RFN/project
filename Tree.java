@@ -31,15 +31,17 @@ public class Tree {
 
         return root;
     }
-
-    public void tambahBarang(Barang barang) {
-        Node kategoriNode = searchKategori(barang.kategori);
-        if (kategoriNode != null) {
-            kategoriNode.barangList.tambah(barang);
+    
+    public void tambahBarang(String kategori, Barang barang) {
+        Node node = searchKategori(kategori); // Cari kategori berdasarkan nama
+        if (node != null) {
+            node.barangList.tambah(barang); // Tambahkan barang ke dalam daftar barang
+            System.out.println("Barang berhasil ditambahkan ke kategori " + kategori);
         } else {
-            System.out.println("Kategori tidak ditemukan! Silakan tambahkan kategori terlebih dahulu.");
+            System.out.println("Kategori " + kategori + " tidak ditemukan!");
         }
     }
+    
 
     private Node searchKategori(String kategori) {
         return searchKategoriRecursive(root, kategori);
@@ -93,4 +95,6 @@ public class Tree {
             displayRecursive(root.right);
         }
     }
+
+    
 }
