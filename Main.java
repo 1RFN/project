@@ -108,7 +108,7 @@ public class Main {
         int stok = scanner.nextInt();
         System.out.print("Masukkan Harga Per Unit: ");
         int harga = scanner.nextInt();
-        scanner.nextLine(); // consume newline
+        scanner.nextLine(); 
         System.out.print("Masukkan Tanggal Diterima (yyyy-mm-dd): ");
         String tanggal = scanner.nextLine();
 
@@ -131,7 +131,7 @@ public class Main {
             case "stok":
                 System.out.print("Masukkan Stok Baru: ");
                 newValue = scanner.nextInt();
-                scanner.nextLine(); // consume newline
+                scanner.nextLine(); 
                 break;
             case "tanggal":
                 System.out.print("Masukkan Tanggal Diterima Baru: ");
@@ -169,7 +169,7 @@ public class Main {
         System.out.println("===========================");
         System.out.print("Pilih menu: ");
         int choice = scanner.nextInt();
-        scanner.nextLine(); // consume newline
+        scanner.nextLine(); 
         switch (choice) {
             case 1:
             barangList.sortById();
@@ -239,6 +239,24 @@ public class Main {
         System.out.println("\n===========================");
         System.out.println("     PENERIMAAN BARANG");
         System.out.println("===========================");
-        // Implementasi penerimaan barang bisa ditambahkan disini.
+        System.out.println("===========================");
+        System.out.println("1. Tambah Barang Masuk");
+        System.out.println("2. Riwayat penerimaan Barang");
+        System.out.println("4. Kembali");
+        System.out.println("===========================");
+        System.out.print("Pilih menu: ");
+        int choice = scanner.nextInt();
+        scanner.nextLine(); 
+        switch (choice) {
+            case 1:
+            tambahBarang();
+                break;
+            case 2:
+            riwayatStack.tampilkan();
+                break;
+            default:
+                System.out.println("Pilihan tidak valid, coba lagi.");
+        }
+       
     }
 }
