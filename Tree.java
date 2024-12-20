@@ -36,7 +36,6 @@ public class Tree {
         Node node = searchKategori(kategori); // Cari kategori berdasarkan nama
         if (node != null) {
             node.barangList.tambah(barang); // Tambahkan barang ke dalam daftar barang
-            System.out.println("Barang berhasil ditambahkan ke kategori " + kategori);
         } else {
             System.out.println("Kategori " + kategori + " tidak ditemukan!");
         }
@@ -95,6 +94,4 @@ public class Tree {
             displayRecursive(root.right);
         }
     }
-
-    
 }

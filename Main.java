@@ -14,18 +14,29 @@ public class Main {
         tree.insertKategori("Alat Tulis");
         tree.insertKategori("Aksesoris");
 
-        barangList.tambah(new Barang("B001", "Laptop", "Elektronik", 10, 7000000, "2024-12-01"));
+        /* 
+        barangList.tambah(new Barang("A001", "Laptop", "Elektronik", 10, 7000000, "2024-12-01"));
         barangList.tambah(new Barang("B002", "Meja Kantor", "Furniture", 5, 1500000, "2024-12-01"));
-        barangList.tambah(new Barang("B003", "Buku Tulis", "Alat Tulis", 50, 8000, "2024-12-01"));
-        barangList.tambah(new Barang("B004", "Kipas Angin", "Elektronik", 8, 250000, "2024-12-01"));
-        barangList.tambah(new Barang("B005", "Printer", "Elektronik", 7, 1200000, "2024-12-01"));
-        barangList.tambah(new Barang("B006", "Mouse", "Aksesoris", 25, 150000, "2024-12-01"));
-        barangList.tambah(new Barang("B007", "Tas Laptop", "Aksesoris", 15, 200000, "2024-12-01"));
-        barangList.tambah(new Barang("B008", "Whiteboard", "Alat Tulis", 3, 350000, "2024-12-01"));
-        barangList.tambah(new Barang("B009", "Kabel HDMI", "Elektronik", 20, 75000, "2024-12-01"));
-        barangList.tambah(new Barang("B010", "Headset", "Aksesoris", 12, 300000, "2024-12-01"));
-        
-       
+        barangList.tambah(new Barang("C003", "Buku Tulis", "Alat Tulis", 50, 8000, "2024-12-01"));
+        barangList.tambah(new Barang("A004", "Kipas Angin", "Elektronik", 8, 250000, "2024-12-01"));
+        barangList.tambah(new Barang("A005", "Printer", "Elektronik", 7, 1200000, "2024-12-01"));
+        barangList.tambah(new Barang("D006", "Mouse", "Aksesoris", 25, 150000, "2024-12-01"));
+        barangList.tambah(new Barang("D007", "Tas Laptop", "Aksesoris", 15, 200000, "2024-12-01"));2
+        barangList.tambah(new Barang("C008", "Whiteboard", "Alat Tulis", 3, 350000, "2024-12-01"));
+        barangList.tambah(new Barang("A009", "Kabel HDMI", "Elektronik", 20, 75000, "2024-12-01"));
+        barangList.tambah(new Barang("D010", "Headset", "Aksesoris", 12, 300000, "2024-12-01"));
+        */
+        tree.tambahBarang("Elektronik", new Barang("A001", "Laptop", "Elektronik", 10, 7000000, "2024-12-01"));
+        tree.tambahBarang("Furniture", new Barang("B002", "Meja Kantor", "Furniture", 5, 1500000, "2024-12-01"));
+        tree.tambahBarang("Aksesoris", new Barang("D006", "Mouse", "Aksesoris", 25, 150000, "2024-12-01"));
+        tree.tambahBarang("Elektronik", new Barang("A004", "Kipas Angin", "Elektronik", 8, 250000, "2024-12-01"));
+        tree.tambahBarang("Elektronik", new Barang("A005", "Printer", "Elektronik", 7, 1200000, "2024-12-01"));
+        tree.tambahBarang("Aksesoris", new Barang("D007", "Tas Laptop", "Aksesoris", 15, 200000, "2024-12-01"));
+        tree.tambahBarang("Alat Tulis", new Barang("C003", "Buku Tulis", "Alat Tulis", 50, 8000, "2024-12-01"));
+        tree.tambahBarang("Alat Tulis", new Barang("C008", "Whiteboard", "Alat Tulis", 3, 350000, "2024-12-01"));
+        tree.tambahBarang("Elektronik", new Barang("A009", "Kabel HDMI", "Elektronik", 20, 75000, "2024-12-01"));
+        tree.tambahBarang("Aksesoris", new Barang("D010", "Headset", "Aksesoris", 12, 300000, "2024-12-01"));
+
         while (true) {
             showMainMenu();
             int choice = scanner.nextInt();
@@ -222,12 +233,20 @@ public class Main {
                 System.out.print("Masukkan ID Barang yang dikirim: ");
                 String idKirim = scanner.nextLine();
                 Barang barangKirim = barangList.searchById(idKirim);
-                if (barangKirim != null && barangKirim.jumlah_stok > 0) {
-                    barangKirim.jumlah_stok--; 
-                    riwayatStack.push(barangKirim); 
-                    System.out.println("Barang " + barangKirim.nama + " berhasil dikirim.");
+                if (barangKirim != null) {
+                    System.out.print("Masukkan jumlah barang yang dikirim: ");
+                    int jumlahKirim = scanner.nextInt();
+                    scanner.nextLine(); // consume newline
+
+                    if (barangKirim.jumlah_stok >= jumlahKirim) {
+                        barangKirim.jumlah_stok -= jumlahKirim; // Kurangi stok
+                        riwayatStack.push(new Barang(barangKirim.id, barangKirim.nama, barangKirim.kategori, jumlahKirim, barangKirim.harga_satuan, ""));
+                        System.out.println("Barang " + barangKirim.nama + " sejumlah " + jumlahKirim + " berhasil dikirim.");
+                    } else {
+                        System.out.println("Stok tidak mencukupi. Stok tersedia: " + barangKirim.jumlah_stok);
+                    }
                 } else {
-                    System.out.println("Barang tidak tersedia atau stok tidak cukup.");
+                    System.out.println("Barang dengan ID " + idKirim + " tidak ditemukan.");
                 }
                 break;
                 case 2:
