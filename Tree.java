@@ -90,6 +90,7 @@ public class Tree {
             }
         }
     }
+
     public void display() {
         displayRecursive(root);
     }
@@ -100,6 +101,16 @@ public class Tree {
             System.out.println("Kategori: " + root.kategori);
             root.barangList.tampilkan();
             displayRecursive(root.right);
+        }
+    }
+
+    public void sortBarangInKategori(String kategori, String field) {
+        Node node = searchKategori(kategori);
+        if (node != null) {
+            node.barangList.sort(field);
+            System.out.println("Barang dalam kategori " + kategori + " berhasil diurutkan berdasarkan " + field + ".");
+        } else {
+            System.out.println("Kategori " + kategori + " tidak ditemukan!");
         }
     }
 }

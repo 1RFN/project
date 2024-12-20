@@ -187,7 +187,7 @@ public class Main {
             scanner.nextLine(); 
             switch (choice) {
                 case 1:
-                barangList.sortById();
+                sortBarang();
                     break;
                 case 2:
                 cariBarang();
@@ -200,6 +200,20 @@ public class Main {
 
         }
         
+    }
+
+    public static void sortBarang() {
+        System.out.print("Masukkan Kategori yang akan diurutkan: ");
+        String kategori = scanner.nextLine();
+    
+        System.out.print("Masukkan Field yang akan diurutkan (nama, stok, tanggal): ");
+        String field = scanner.nextLine();
+    
+        try {
+            tree.sortBarangInKategori(kategori, field);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
     }
 
     private static void cariBarang() {

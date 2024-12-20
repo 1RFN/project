@@ -98,30 +98,77 @@ public class LinkedList {
         System.out.printf("+------------+------------------+------------+----------------+------------------+\n");
     }
 
-    public void sortById() {
+    public void sort(String field) {
         if (head == null || head.next == null) {
             return;
         }
-        boolean swapped;
-        do {
-            swapped = false;
-            Node current = head;
-            while (current.next != null) {
-                if (current.data.id.compareTo(current.next.data.id) > 0) {
-                    Barang temp = current.data;
-                    current.data = current.next.data;
-                    current.next.data = temp;
-                    swapped = true;
-                }
-                current = current.next;
+        head = mergeSort(head, field);
+    }
+    
+    private Node mergeSort(Node head, String field) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+    
+        Node middle = getMiddle(head);
+        Node nextOfMiddle = middle.next;
+        middle.next = null;
+    
+        Node left = mergeSort(head, field);
+        Node right = mergeSort(nextOfMiddle, field);
+    
+        return sortedMerge(left, right, field);
+    }
+    
+    private Node getMiddle(Node head) {
+        if (head == null) {
+            return head;
+        }
+        Node slow = head, fast = head.next;
+        while (fast != null) {
+            fast = fast.next;
+            if (fast != null) {
+                slow = slow.next;
+                fast = fast.next;
             }
-        } while (swapped);
-        isSorted = true;
-        System.out.println("List berhasil diurutkan berdasarkan ID.");
+        }
+        return slow;
+    }
+    
+    private Node sortedMerge(Node left, Node right, String field) {
+        if (left == null) {
+            return right;
+        }
+        if (right == null) {
+            return left;
+        }
+    
+        Node result;
+        if (compare(left.data, right.data, field) <= 0) {
+            result = left;
+            result.next = sortedMerge(left.next, right, field);
+        } else {
+            result = right;
+            result.next = sortedMerge(left, right.next, field);
+        }
+        return result;
+    }
+    
+    private int compare(Barang a, Barang b, String field) {
+        switch (field.toLowerCase()) {
+            case "nama":
+                return a.nama.compareTo(b.nama);
+            case "stok":
+                return Integer.compare(a.jumlah_stok, b.jumlah_stok);
+            case "tanggal":
+                return a.tanggal_diterima.compareTo(b.tanggal_diterima);
+            default:
+                throw new IllegalArgumentException("Field tidak valid! Gunakan 'nama', 'stok', atau 'tanggal'.");
+        }
     }
 
     public Barang binarySearchById(String id) {
-        sortById();
+        sort("id");
         int left = 0, right = getSize() - 1;
         Node[] nodes = toArray();
         while (left <= right) {
