@@ -228,7 +228,78 @@ public class Main {
             System.out.println("Barang tidak ditemukan.");
         }
     }
+    private static final Queue pengirimanQueue = new Queue();
 
+    private static void pengirimanBarang() {
+        while (true) {
+            System.out.println("\n===========================");
+            System.out.println("     PENGIRIMAN BARANG");
+            System.out.println("===========================");
+            System.out.println("1. Tambah ke Antrian Pengiriman");
+            System.out.println("2. Proses Pengiriman Barang");
+            System.out.println("3. Riwayat Pengiriman Barang");
+            System.out.println("4. Kembali");
+            System.out.println("===========================");
+            System.out.print("Pilih menu: ");
+            int choice = scanner.nextInt();
+            scanner.nextLine(); // consume newline
+            switch (choice) {
+                case 1:
+                System.out.print("Masukkan kategori barang: ");
+                String kategori = scanner.nextLine();
+                Tree.Node kategoriNode = tree.searchKategori(kategori);
+                
+                if (kategoriNode != null) {
+                    System.out.print("Masukkan ID Barang yang akan dikirim: ");
+                    String idBarang = scanner.nextLine();
+                    Barang barang = kategoriNode.barangList.searchById(idBarang);
+                    if (barang != null) {
+                        pengirimanQueue.enqueue(barang); // Tambahkan barang ke antrian pengiriman
+                        System.out.println("Barang " + barang.nama + " berhasil ditambahkan ke antrian pengiriman.");
+                    } else {
+                        System.out.println("Barang dengan ID " + idBarang + " tidak ditemukan dalam kategori " + kategori + ".");
+                    }
+                } else {
+                    System.out.println("Kategori " + kategori + " tidak ditemukan!");
+                }
+                    break;
+                case 2:
+                    Barang barangDikirim = pengirimanQueue.dequeue();
+                    if (barangDikirim != null) {
+                        System.out.print("Masukkan jumlah barang yang dikirim: ");
+                        int jumlah = scanner.nextInt();
+                        scanner.nextLine(); // consume newline
+                        if (barangDikirim.jumlah_stok >= jumlah) {
+                            barangDikirim.jumlah_stok -= jumlah;
+                            riwayatStack.push(new Barang(
+                                barangDikirim.id,
+                                barangDikirim.nama,
+                                barangDikirim.kategori,
+                                jumlah,
+                                barangDikirim.harga_satuan,
+                                ""
+                            ));
+                            System.out.println("Barang " + barangDikirim.nama + " sejumlah " + jumlah + " berhasil dikirim.");
+                        } else {
+                            System.out.println("Stok barang tidak mencukupi. Stok saat ini: " + barangDikirim.jumlah_stok);
+                        }
+                    } else {
+                        System.out.println("Antrian pengiriman kosong.");
+                    }
+                    break;
+                case 3:
+                    System.out.println("Riwayat Pengiriman:");
+                    riwayatStack.tampilkan();
+                    break;
+                case 4:
+                    return;
+                default:
+                    System.out.println("Pilihan tidak valid, coba lagi.");
+            }
+        }
+    }
+    
+    /* 
     private static void pengirimanBarang() {
         while (true) { 
             System.out.println("\n===========================");
@@ -252,6 +323,7 @@ public class Main {
                     System.out.print("Masukkan jumlah barang yang dikirim: ");
                     int jumlahKirim = scanner.nextInt();
                     scanner.nextLine(); // consume newline
+                    tree.enqueue(barangKirim);
 
                     if (barangKirim.jumlah_stok >= jumlahKirim) {
                         barangKirim.jumlah_stok -= jumlahKirim; // Kurangi stok
@@ -263,6 +335,7 @@ public class Main {
                 } else {
                     System.out.println("Barang dengan ID " + idKirim + " tidak ditemukan.");
                 }
+                tree.dequeue(barangkirim;)
                 break;
                 case 2:
                 riwayatStack.tampilkan();
@@ -278,6 +351,7 @@ public class Main {
        
         
     }
+    */
 
 //    private static void penerimaanBarang() {
 //          while (true) {

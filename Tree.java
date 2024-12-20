@@ -1,7 +1,7 @@
 import java.util.NoSuchElementException;
 
 public class Tree {
-    private class Node {
+    public class Node {
         String kategori;
         LinkedList barangList;
         Node left, right;
@@ -44,7 +44,7 @@ public class Tree {
     }
     
 
-    private Node searchKategori(String kategori) {
+    public Node searchKategori(String kategori) {
         return searchKategoriRecursive(root, kategori);
     }
 
