@@ -198,65 +198,73 @@ public class Main {
     }
 
     private static void pengirimanBarang() {
-        System.out.println("\n===========================");
-        System.out.println("     PENGIRIMAN BARANG");
-        System.out.println("===========================");
-        System.out.println("===========================");
-        System.out.println("1. Buat Pengiriman Barang");
-        System.out.println("2. Riwayat Pengirirman Barang");
-        System.out.println("3. Cari Pengiriman Berdasarkan ID");
-        System.out.println("4. Kembali");
-        System.out.println("===========================");
-        System.out.print("Pilih menu: ");
-        int choice = scanner.nextInt();
-        scanner.nextLine(); // consume newline
-        switch (choice) {
-            case 1:
-            System.out.print("Masukkan ID Barang yang dikirim: ");
-            String idKirim = scanner.nextLine();
-            Barang barangKirim = barangList.searchById(idKirim);
-            if (barangKirim != null && barangKirim.jumlah_stok > 0) {
-                barangKirim.jumlah_stok--; 
-                riwayatStack.push(barangKirim); 
-                System.out.println("Barang " + barangKirim.nama + " berhasil dikirim.");
-            } else {
-                System.out.println("Barang tidak tersedia atau stok tidak cukup.");
-            }
-            break;
-            case 2:
-            riwayatStack.tampilkan();
+        while (true) { 
+            System.out.println("\n===========================");
+            System.out.println("     PENGIRIMAN BARANG");
+            System.out.println("===========================");
+            System.out.println("===========================");
+            System.out.println("1. Buat Pengiriman Barang");
+            System.out.println("2. Riwayat Pengirirman Barang");
+            System.out.println("3. Cari Pengiriman Berdasarkan ID");
+            System.out.println("4. Kembali");
+            System.out.println("===========================");
+            System.out.print("Pilih menu: ");
+            int choice = scanner.nextInt();
+            scanner.nextLine(); // consume newline
+            switch (choice) {
+                case 1:
+                System.out.print("Masukkan ID Barang yang dikirim: ");
+                String idKirim = scanner.nextLine();
+                Barang barangKirim = barangList.searchById(idKirim);
+                if (barangKirim != null && barangKirim.jumlah_stok > 0) {
+                    barangKirim.jumlah_stok--; 
+                    riwayatStack.push(barangKirim); 
+                    System.out.println("Barang " + barangKirim.nama + " berhasil dikirim.");
+                } else {
+                    System.out.println("Barang tidak tersedia atau stok tidak cukup.");
+                }
                 break;
-            case 3:
-                return;
-            case 4:
-                return; 
-            default:
-                System.out.println("Pilihan tidak valid, coba lagi.");
+                case 2:
+                riwayatStack.tampilkan();
+                    break;
+                case 3:
+                    return;
+                case 4:
+                    return; 
+                default:
+                    System.out.println("Pilihan tidak valid, coba lagi.");
+            }
         }
+       
+        
     }
 
     private static void penerimaanBarang() {
-        System.out.println("\n===========================");
-        System.out.println("     PENERIMAAN BARANG");
-        System.out.println("===========================");
-        System.out.println("===========================");
-        System.out.println("1. Tambah Barang Masuk");
-        System.out.println("2. Riwayat penerimaan Barang");
-        System.out.println("4. Kembali");
-        System.out.println("===========================");
-        System.out.print("Pilih menu: ");
-        int choice = scanner.nextInt();
-        scanner.nextLine(); 
-        switch (choice) {
-            case 1:
-            tambahBarang();
-                break;
-            case 2:
-            riwayatStack.tampilkan();
-                break;
-            default:
-                System.out.println("Pilihan tidak valid, coba lagi.");
+        while (true) {
+            System.out.println("\n===========================");
+            System.out.println("     PENERIMAAN BARANG");
+            System.out.println("===========================");
+            System.out.println("===========================");
+            System.out.println("1. Tambah Barang Masuk");
+            System.out.println("2. Riwayat penerimaan Barang");
+            System.out.println("3. Kembali");
+            System.out.println("===========================");
+            System.out.print("Pilih menu: ");
+            int choice = scanner.nextInt();
+            scanner.nextLine(); 
+            switch (choice) {
+                case 1:
+                    tambahBarang();
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    return;
+                default:
+                    System.out.println("Pilihan tidak valid, coba lagi.");
+            }
         }
        
     }
 }
+
