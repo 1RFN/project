@@ -60,8 +60,8 @@ public class Main {
         System.out.println("1. MANAJEMEN BARANG");
         System.out.println("2. LIHAT DAFTAR BARANG");
         System.out.println("3. PENGIRIMAN BARANG");
-        System.out.println("4. PENERIMAAN BARANG");
-        System.out.println("5. EXIT");
+//        System.out.println("4. PENERIMAAN BARANG");
+        System.out.println("4. EXIT");
         System.out.println("===========================");
         System.out.print("Pilih menu: ");
     }
@@ -158,30 +158,34 @@ public class Main {
     }
 
     private static void lihatBarang() {
-        System.out.println("\n===========================");
-        System.out.println("    LIHAT DAFTAR BARANG");
-        System.out.println("===========================");
-        barangList.tampilkan();
-        System.out.println("===========================");
-        System.out.println("1. Sortir Barang");
-        System.out.println("2. Cari Barang");
-        System.out.println("3. Kembali");
-        System.out.println("===========================");
-        System.out.print("Pilih menu: ");
-        int choice = scanner.nextInt();
-        scanner.nextLine(); 
-        switch (choice) {
-            case 1:
-            barangList.sortById();
-                break;
-            case 2:
-            cariBarang();
-                break;
-            case 3:
-                return;
-            default:
-                System.out.println("Pilihan tidak valid, coba lagi.");
+        while (true) {
+            System.out.println("\n===========================");
+            System.out.println("    LIHAT DAFTAR BARANG");
+            System.out.println("===========================");
+            barangList.tampilkan();
+            System.out.println("===========================");
+            System.out.println("1. Sortir Barang");
+            System.out.println("2. Cari Barang");
+            System.out.println("3. Kembali");
+            System.out.println("===========================");
+            System.out.print("Pilih menu: ");
+            int choice = scanner.nextInt();
+            scanner.nextLine(); 
+            switch (choice) {
+                case 1:
+                barangList.sortById();
+                    break;
+                case 2:
+                cariBarang();
+                    break;
+                case 3:
+                    return;
+                default:
+                    System.out.println("Pilihan tidak valid, coba lagi.");
+            }
+
         }
+        
     }
 
     private static void cariBarang() {
@@ -239,8 +243,8 @@ public class Main {
         
     }
 
-    private static void penerimaanBarang() {
-        while (true) {
+   private static void penerimaanBarang() {
+         while (true) {
             System.out.println("\n===========================");
             System.out.println("     PENERIMAAN BARANG");
             System.out.println("===========================");
