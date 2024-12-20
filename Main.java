@@ -124,7 +124,7 @@ public class Main {
 
         Barang barang = new Barang(id, nama, kategori, stok, harga, tanggal);
 
-        barangList.tambah(barang);
+        // barangList.tambah(barang);
         tree.tambahBarang(kategori, barang);
         System.out.println("Barang berhasil ditambahkan.");
     }
@@ -156,7 +156,7 @@ public class Main {
                 return;
         }
         try {
-            barangList.update(id, field, newValue);
+            tree.updateBarang(id, field, newValue);
             System.out.println("Barang berhasil diperbarui.");
         } catch (IllegalArgumentException e) {
             System.out.println("Error: " + e.getMessage());
@@ -168,7 +168,7 @@ public class Main {
     private static void hapusBarang() {
         System.out.print("Masukkan ID Barang yang akan dihapus: ");
         String id = scanner.nextLine();
-        barangList.hapus(id);
+        tree.hapusBarang(id);
     }
 
     private static void lihatBarang() {

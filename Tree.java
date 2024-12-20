@@ -1,3 +1,5 @@
+import java.util.NoSuchElementException;
+
 public class Tree {
     private class Node {
         String kategori;
@@ -75,13 +77,19 @@ public class Tree {
 
     private void updateBarangRecursive(Node root, String id, String field, Object newValue) {
         if (root == null) {
-            return;
+        throw new NoSuchElementException("ID Barang tidak ditemukan.");
         }
-        root.barangList.update(id, field, newValue); 
-        updateBarangRecursive(root.left, id, field, newValue);
-        updateBarangRecursive(root.right, id, field, newValue);
+        try {
+        root.barangList.update(id, field, newValue);
+        } catch (NoSuchElementException e) {
+            if (root.left != null) {
+            updateBarangRecursive(root.left, id, field, newValue);
+            }
+            if (root.right != null) {
+            updateBarangRecursive(root.right, id, field, newValue);
+            }
+        }
     }
-
     public void display() {
         displayRecursive(root);
     }
