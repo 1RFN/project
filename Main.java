@@ -2,10 +2,11 @@ import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class Main {
-     static Scanner scanner = new Scanner(System.in);
-     static LinkedList barangList = new LinkedList();
-     static Stack riwayatStack = new Stack();
-     static Tree tree = new Tree();
+    static Scanner scanner = new Scanner(System.in);
+    static LinkedList barangList = new LinkedList();
+    static Stack riwayatStack = new Stack();
+    static Tree tree = new Tree();
+    static Queue pengirimanQueue = new Queue();
     public static void main(String[] args) {
        
 
@@ -219,8 +220,11 @@ public class Main {
     private static void cariBarang() {
         System.out.print("Masukkan ID Barang yang ingin dicari: ");
         String idSearch = scanner.nextLine();
-        Barang result = barangList.binarySearchById(idSearch);
+        Barang result = tree.cariBarangById(idSearch); // Gunakan tree untuk mencari barang
         if (result != null) {
+            System.out.printf("+------------+------------------+------------+----------------+------------------+\n");
+            System.out.printf("| ID Barang | Nama Barang      | Stok Barang | Harga Per Unit | Tanggal Diterima |\n");
+            System.out.printf("+------------+------------------+------------+----------------+------------------+\n");
             System.out.printf("| %-10s | %-16s | %-10d | %-14d | %-16s |\n",
                     result.id, result.nama, result.jumlah_stok,
                     result.harga_satuan, result.tanggal_diterima);
@@ -228,7 +232,6 @@ public class Main {
             System.out.println("Barang tidak ditemukan.");
         }
     }
-    private static final Queue pengirimanQueue = new Queue();
 
     private static void pengirimanBarang() {
         while (true) {
@@ -238,7 +241,9 @@ public class Main {
             System.out.println("1. Tambah ke Antrian Pengiriman");
             System.out.println("2. Proses Pengiriman Barang");
             System.out.println("3. Riwayat Pengiriman Barang");
-            System.out.println("4. Kembali");
+            System.out.println("4. Tampilkan Daftar Barang");
+            System.out.println("5. Hapus Barang dari Antrian");
+            System.out.println("6. Kembali");
             System.out.println("===========================");
             System.out.print("Pilih menu: ");
             int choice = scanner.nextInt();
@@ -265,6 +270,7 @@ public class Main {
                     break;
                 case 2:
                     Barang barangDikirim = pengirimanQueue.dequeue();
+
                     if (barangDikirim != null) {
                         System.out.print("Masukkan jumlah barang yang dikirim: ");
                         int jumlah = scanner.nextInt();
@@ -292,13 +298,35 @@ public class Main {
                     riwayatStack.tampilkan();
                     break;
                 case 4:
+                    tampilkanAntrian();
+                    break;
+                case 5:
+                    hapusDariAntrian();
+                    break;
+                case 6:
                     return;
                 default:
                     System.out.println("Pilihan tidak valid, coba lagi.");
             }
         }
     }
+    private static void tampilkanAntrian() {
+        System.out.println("Daftar Antrian Pengiriman:");
+        pengirimanQueue.tampilkan();
+    }
+
+    private static void hapusDariAntrian() {
+        System.out.print("Masukkan ID Barang yang ingin dihapus dari antrian: ");
+        String idBarang = scanner.nextLine();
     
+        boolean success = pengirimanQueue.hapus(idBarang);
+    
+        if (success) {
+            System.out.println("Barang dengan ID " + idBarang + " berhasil dihapus dari antrian.");
+        } else {
+            System.out.println("Barang dengan ID " + idBarang + " tidak ditemukan dalam antrian.");
+        }
+    }
     /* 
     private static void pengirimanBarang() {
         while (true) { 

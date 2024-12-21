@@ -113,4 +113,26 @@ public class Tree {
             System.out.println("Kategori " + kategori + " tidak ditemukan!");
         }
     }
+
+    public Barang cariBarangById(String id) {
+        return cariBarangByIdRecursive(root, id);
+    }
+    
+    private Barang cariBarangByIdRecursive(Node root, String id) {
+        if (root == null) {
+            return null;
+        }
+    
+        Barang found = root.barangList.searchById(id);
+        if (found != null) {
+            return found;
+        }
+    
+        found = cariBarangByIdRecursive(root.left, id);
+        if (found != null) {
+            return found;
+        }
+    
+        return cariBarangByIdRecursive(root.right, id);
+    }
 }
