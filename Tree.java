@@ -1,5 +1,4 @@
 import java.util.NoSuchElementException;
-
 public class Tree {
     public class Node {
         String kategori;
@@ -17,7 +16,6 @@ public class Tree {
     public Tree (String kategori){
         this.root = new Node (kategori);
     }
-    
     public void insertKategori(String parentKategori, String childKategori) {
         Node parentNode = searchKategori(parentKategori);
         if (parentNode == null) {
@@ -34,25 +32,6 @@ public class Tree {
             sibling.nextSibling = new Node(childKategori);
         }
       }
-    /*public void insertKategori(String kategori) {
-        root = insertKategoriRecursive(root, kategori);
-    }
-
-    private Node insertKategoriRecursive(Node root, String kategori) {
-        if (root == null) {
-            root = new Node(kategori);
-            return root;
-        }
-
-        if (kategori.compareTo(root.kategori) < 0) {
-            root.left = insertKategoriRecursive(root.left, kategori);
-        } else if (kategori.compareTo(root.kategori) > 0) {
-            root.right = insertKategoriRecursive(root.right, kategori);
-        }
-
-        return root;
-    }*/
-    
     public void tambahBarang(String kategori, Barang barang) {
         Node node = searchKategori(kategori); // Cari kategori berdasarkan nama
         if (node != null) {
@@ -155,4 +134,22 @@ public class Tree {
     
         return cariBarangByIdRecursive(node.nextSibling, id);
     }
+    /*public void insertKategori(String kategori) {
+        root = insertKategoriRecursive(root, kategori);
+    }
+
+    private Node insertKategoriRecursive(Node root, String kategori) {
+        if (root == null) {
+            root = new Node(kategori);
+            return root;
+        }
+
+        if (kategori.compareTo(root.kategori) < 0) {
+            root.left = insertKategoriRecursive(root.left, kategori);
+        } else if (kategori.compareTo(root.kategori) > 0) {
+            root.right = insertKategoriRecursive(root.right, kategori);
+        }
+
+        return root;
+    }*/
 }
