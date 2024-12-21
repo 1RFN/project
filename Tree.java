@@ -127,14 +127,14 @@ public class Tree {
 
     private void displayRecursive(Node node) {
         if (node != null) {
-            displayRecursive(root.left);
-            System.out.println("Kategori: " + node.kategori);
-            node.barangList.tampilkan();
+            if (node != root){
+                System.out.println("Kategori: " + node.kategori);
+                node.barangList.tampilkan();
+            }
             displayRecursive(node.firstChild); 
             displayRecursive(node.nextSibling);
         }
     }
-
     public void sortBarangInKategori(String kategori, String field) {
         Node node = searchKategori(kategori);
         if (node != null) {
