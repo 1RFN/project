@@ -2,7 +2,6 @@ import java.util.NoSuchElementException;
 
 public class LinkedList {
     private Node head;
-    // private boolean isSorted = false;
 
     public void tambah(Barang barang) {
         Node newNode = new Node(barang);
@@ -167,36 +166,7 @@ public class LinkedList {
             default:
                 throw new IllegalArgumentException("Field tidak valid! Gunakan 'nama', 'stok', atau 'tanggal'.");
         }
-    }
-/* 
-    public Barang binarySearchById(String id) {
-        sort("id");
-        int left = 0, right = getSize() - 1;
-        Node[] nodes = toArray();
-        while (left <= right) {
-            int mid = (left + right) / 2;
-            int compare = nodes[mid].data.id.compareTo(id);
-            if (compare == 0) {
-                return nodes[mid].data;
-            } else if (compare < 0) {
-                left = mid + 1;
-            } else {
-                right = mid - 1;
-            }
-        }
-        return null;
-    }
-*/
-    // private Node[] toArray() {
-    //     int size = getSize();
-    //     Node[] array = new Node[size];
-    //     Node current = head;
-    //     for (int i = 0; i < size; i++) {
-    //         array[i] = current;
-    //         current = current.next;
-    //     }
-    //     return array;
-    // }
+    }   
 
     public Barang searchById(String id) {
         Node current = head;

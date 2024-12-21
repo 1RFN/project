@@ -33,35 +33,15 @@ public class Tree {
             sibling.nextSibling = new Node(childKategori);
         }
       }
-      
-    /*public void insertKategori(String kategori) {
-        root = insertKategoriRecursive(root, kategori);
-    }
-
-    private Node insertKategoriRecursive(Node root, String kategori) {
-        if (root == null) {
-            root = new Node(kategori);
-            return root;
-        }
-
-        if (kategori.compareTo(root.kategori) < 0) {
-            root.left = insertKategoriRecursive(root.left, kategori);
-        } else if (kategori.compareTo(root.kategori) > 0) {
-            root.right = insertKategoriRecursive(root.right, kategori);
-        }
-
-        return root;
-    }*/
     
     public void tambahBarang(String kategori, Barang barang) {
-        Node node = searchKategori(kategori); // Cari kategori berdasarkan nama
+        Node node = searchKategori(kategori);
         if (node != null) {
             node.barangList.tambah(barang); 
         } else {
             System.out.println("Kategori " + kategori + " tidak ditemukan!");
         }
     }
-    
 
     public Node searchKategori(String kategori) {
         return searchKategoriRecursive(root, kategori);
@@ -105,14 +85,12 @@ public class Tree {
         try {
             node.barangList.update(id, field, newValue);
         } catch (NoSuchElementException e) {
-            // Jika tidak ditemukan di node saat ini, cari di anak-anaknya
             if (node.firstChild != null) {
                 try {
                     updateBarangRecursive(node.firstChild, id, field, newValue);
                     return;
                 } catch (NoSuchElementException ignored) {}
             }
-            // Jika tidak ditemukan di anak-anaknya, cari di saudara-saudaranya
             if (node.nextSibling != null) {
                 updateBarangRecursive(node.nextSibling, id, field, newValue);
             } else {
@@ -166,22 +144,5 @@ public class Tree {
     
         return cariBarangByIdRecursive(node.nextSibling, id);
     }
-    /*public void insertKategori(String kategori) {
-        root = insertKategoriRecursive(root, kategori);
-    }
-
-    private Node insertKategoriRecursive(Node root, String kategori) {
-        if (root == null) {
-            root = new Node(kategori);
-            return root;
-        }
-
-        if (kategori.compareTo(root.kategori) < 0) {
-            root.left = insertKategoriRecursive(root.left, kategori);
-        } else if (kategori.compareTo(root.kategori) > 0) {
-            root.right = insertKategoriRecursive(root.right, kategori);
-        }
-
-        return root;
-    }*/
+   
 }

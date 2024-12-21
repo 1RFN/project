@@ -25,16 +25,6 @@ public class Stack {
         }
     }
 
-    public Barang pop(){
-        if(top == null){
-            System.out.println("Stack kosong, tidak ada barang yang dikeluarkan");
-            return null;
-        }
-        Barang barang = top.data;
-        top = top.next;
-        return barang;
-    }
-
     public void tampilkan(){
         if(top == null){
             System.out.println("Kosong");

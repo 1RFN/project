@@ -29,7 +29,7 @@ public class Main {
         while (true) {
             showMainMenu();
             int choice = scanner.nextInt();
-            scanner.nextLine(); // consume newline
+            scanner.nextLine();
             switch (choice) {
                 case 1:
                     manageBarang();
@@ -40,17 +40,13 @@ public class Main {
                 case 3:
                     pengirimanBarang();
                     break;
-                // case 4:
-                //     penerimaanBarang();
-                //     break;
                 case 4:
                     System.out.println("Terima kasih! Anda telah keluar.");
                     return;
                 default:
                     System.out.println("Pilihan tidak valid, coba lagi.");
             }
-        }
-        
+        }        
     }
     private static void showMainMenu() {
         
@@ -60,7 +56,6 @@ public class Main {
         System.out.println("1. MANAJEMEN BARANG");
         System.out.println("2. LIHAT DAFTAR BARANG");
         System.out.println("3. PENGIRIMAN BARANG");
-//        System.out.println("4. PENERIMAAN BARANG");
         System.out.println("4. EXIT");
         System.out.println("===========================");
         System.out.print("Pilih menu: ");
@@ -78,7 +73,7 @@ public class Main {
             System.out.println("===========================");
             System.out.print("Pilih menu: ");
             int choice = scanner.nextInt();
-            scanner.nextLine(); // consume newline
+            scanner.nextLine();
             switch (choice) {
                 case 1:
                     tambahBarang();
@@ -114,7 +109,6 @@ public class Main {
 
         Barang barang = new Barang(id, nama, kategori, stok, harga, tanggal);
 
-        // barangList.tambah(barang);
         tree.tambahBarang(kategori, barang);
         System.out.println("Barang berhasil ditambahkan.");
     }
@@ -207,7 +201,7 @@ public class Main {
     private static void cariBarang() {
         System.out.print("Masukkan ID Barang yang ingin dicari: ");
         String idSearch = scanner.nextLine();
-        Barang result = tree.cariBarangById(idSearch); // Gunakan tree untuk mencari barang
+        Barang result = tree.cariBarangById(idSearch);
         if (result != null) {
             System.out.printf("+------------+------------------+------------+----------------+------------------+\n");
             System.out.printf("| ID Barang | Nama Barang      | Stok Barang | Harga Per Unit | Tanggal Diterima |\n");
@@ -234,7 +228,7 @@ public class Main {
             System.out.println("===========================");
             System.out.print("Pilih menu: ");
             int choice = scanner.nextInt();
-            scanner.nextLine(); // consume newline
+            scanner.nextLine(); 
             switch (choice) {
                 case 1:
                 System.out.print("Masukkan kategori barang: ");
@@ -246,7 +240,7 @@ public class Main {
                     String idBarang = scanner.nextLine();
                     Barang barang = kategoriNode.barangList.searchById(idBarang);
                     if (barang != null) {
-                        pengirimanQueue.enqueue(barang); // Tambahkan barang ke antrian pengiriman
+                        pengirimanQueue.enqueue(barang); 
                         System.out.println("Barang " + barang.nama + " berhasil ditambahkan ke antrian pengiriman.");
                     } else {
                         System.out.println("Barang dengan ID " + idBarang + " tidak ditemukan dalam kategori " + kategori + ".");
@@ -261,7 +255,7 @@ public class Main {
                     if (barangDikirim != null) {
                         System.out.print("Masukkan jumlah barang yang dikirim: ");
                         int jumlah = scanner.nextInt();
-                        scanner.nextLine(); // consume newline
+                        scanner.nextLine(); 
                         if (barangDikirim.jumlah_stok >= jumlah) {
                             barangDikirim.jumlah_stok -= jumlah;
                             riwayatStack.push(new Barang(
