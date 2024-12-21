@@ -1,3 +1,5 @@
+import java.util.NoSuchElementException;
+
 public class LinkedList {
     private Node head;
     // private boolean isSorted = false;
@@ -80,8 +82,9 @@ public class LinkedList {
             current = current.next;
         }
 
-        throw new RuntimeException("ID Barang tidak ditemukan.");
+        throw new NoSuchElementException("ID Barang tidak ditemukan.");
     }
+
     public void tampilkan() {
         System.out.printf("+------------+------------------+------------+----------------+------------------+\n");
         System.out.printf("| ID Barang | Nama Barang      | Stok Barang | Harga Per Unit | Tanggal Diterima |\n");

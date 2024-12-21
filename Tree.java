@@ -20,6 +20,7 @@ public class Tree {
     
     public void insertKategori(String parentKategori, String childKategori) {
         Node parentNode = searchKategori(parentKategori);
+        
         if (parentNode == null) {
           System.out.println("Parent Kategori " + parentKategori + " tidak ditemukan!");
           return;
@@ -34,6 +35,7 @@ public class Tree {
             sibling.nextSibling = new Node(childKategori);
         }
       }
+      
     /*public void insertKategori(String kategori) {
         root = insertKategoriRecursive(root, kategori);
     }
@@ -56,7 +58,7 @@ public class Tree {
     public void tambahBarang(String kategori, Barang barang) {
         Node node = searchKategori(kategori); // Cari kategori berdasarkan nama
         if (node != null) {
-            node.barangList.tambah(barang); // Tambahkan barang ke dalam daftar barang
+            node.barangList.tambah(barang); 
         } else {
             System.out.println("Kategori " + kategori + " tidak ditemukan!");
         }
@@ -97,16 +99,27 @@ public class Tree {
     public void updateBarang(String id, String field, Object newValue) {
         updateBarangRecursive(root, id, field, newValue);
     }
-
+    
     private void updateBarangRecursive(Node node, String id, String field, Object newValue) {
         if (node == null) {
-        throw new NoSuchElementException("ID Barang tidak ditemukan.");
+            throw new NoSuchElementException("ID Barang tidak ditemukan.");
         }
         try {
             node.barangList.update(id, field, newValue);
         } catch (NoSuchElementException e) {
-            updateBarangRecursive(node.firstChild, id, field, newValue); 
-            updateBarangRecursive(node.nextSibling, id, field, newValue);
+            // Jika tidak ditemukan di node saat ini, cari di anak-anaknya
+            if (node.firstChild != null) {
+                try {
+                    updateBarangRecursive(node.firstChild, id, field, newValue);
+                    return;
+                } catch (NoSuchElementException ignored) {}
+            }
+            // Jika tidak ditemukan di anak-anaknya, cari di saudara-saudaranya
+            if (node.nextSibling != null) {
+                updateBarangRecursive(node.nextSibling, id, field, newValue);
+            } else {
+                throw new NoSuchElementException("ID Barang tidak ditemukan.");
+            }
         }
     }
 
