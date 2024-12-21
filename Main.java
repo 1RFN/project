@@ -5,15 +5,15 @@ public class Main {
     static Scanner scanner = new Scanner(System.in);
     static LinkedList barangList = new LinkedList();
     static Stack riwayatStack = new Stack();
-    static Tree tree = new Tree("Data Barang");
+    static Tree tree = new Tree("Kategori Barang");
     static Queue pengirimanQueue = new Queue();
     public static void main(String[] args) {
        
 
-        tree.insertKategori("Data Barang", "Elektronik");
-        tree.insertKategori("Data Barang", "Furniture");
-        tree.insertKategori("Data Barang", "Alat Tulis");
-        tree.insertKategori("Data Barang", "Aksesoris");
+        tree.insertKategori("Kategori Barang", "Elektronik");
+        tree.insertKategori("Kategori Barang", "Furniture");
+        tree.insertKategori("Kategori Barang", "Alat Tulis");
+        tree.insertKategori("Kategori Barang", "Aksesoris");
         
         tree.tambahBarang("Elektronik", new Barang("A001", "Laptop", "Elektronik", 10, 7000000, "2024-12-01"));
         tree.tambahBarang("Furniture", new Barang("B002", "Meja Kantor", "Furniture", 5, 1500000, "2024-12-01"));
