@@ -34,15 +34,7 @@ public class Stack {
         top = top.next;
         return barang;
     }
-/* 
-    public Barang peek(){
-        if(top == null){
-            System.out.println("Stack kosong, tidak ada barang untuk dilihat");
-            return null;
-        }
-        return top.data;
-    }
-    */
+
     public void tampilkan(){
         if(top == null){
             System.out.println("Kosong");

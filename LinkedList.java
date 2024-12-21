@@ -14,7 +14,7 @@ public class LinkedList {
             current.next = newNode;
         }
     }
-
+ 
     public void hapus(String id) {
         if (head == null) {
             return;
@@ -82,7 +82,6 @@ public class LinkedList {
 
         throw new RuntimeException("ID Barang tidak ditemukan.");
     }
-
     public void tampilkan() {
         System.out.printf("+------------+------------------+------------+----------------+------------------+\n");
         System.out.printf("| ID Barang | Nama Barang      | Stok Barang | Harga Per Unit | Tanggal Diterima |\n");
@@ -104,7 +103,7 @@ public class LinkedList {
         }
         head = mergeSort(head, field);
     }
-    
+
     private Node mergeSort(Node head, String field) {
         if (head == null || head.next == null) {
             return head;
@@ -119,7 +118,7 @@ public class LinkedList {
     
         return sortedMerge(left, right, field);
     }
-    
+
     private Node getMiddle(Node head) {
         if (head == null) {
             return head;
@@ -166,7 +165,7 @@ public class LinkedList {
                 throw new IllegalArgumentException("Field tidak valid! Gunakan 'nama', 'stok', atau 'tanggal'.");
         }
     }
-
+/* 
     public Barang binarySearchById(String id) {
         sort("id");
         int left = 0, right = getSize() - 1;
@@ -184,7 +183,7 @@ public class LinkedList {
         }
         return null;
     }
-
+*/
     private Node[] toArray() {
         int size = getSize();
         Node[] array = new Node[size];

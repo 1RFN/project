@@ -15,18 +15,6 @@ public class Main {
         tree.insertKategori("Alat Tulis");
         tree.insertKategori("Aksesoris");
         
-        /* 
-        barangList.tambah(new Barang("A001", "Laptop", "Elektronik", 10, 7000000, "2024-12-01"));
-        barangList.tambah(new Barang("B002", "Meja Kantor", "Furniture", 5, 1500000, "2024-12-01"));
-        barangList.tambah(new Barang("C003", "Buku Tulis", "Alat Tulis", 50, 8000, "2024-12-01"));
-        barangList.tambah(new Barang("A004", "Kipas Angin", "Elektronik", 8, 250000, "2024-12-01"));
-        barangList.tambah(new Barang("A005", "Printer", "Elektronik", 7, 1200000, "2024-12-01"));
-        barangList.tambah(new Barang("D006", "Mouse", "Aksesoris", 25, 150000, "2024-12-01"));
-        barangList.tambah(new Barang("D007", "Tas Laptop", "Aksesoris", 15, 200000, "2024-12-01"));2
-        barangList.tambah(new Barang("C008", "Whiteboard", "Alat Tulis", 3, 350000, "2024-12-01"));
-        barangList.tambah(new Barang("A009", "Kabel HDMI", "Elektronik", 20, 75000, "2024-12-01"));
-        barangList.tambah(new Barang("D010", "Headset", "Aksesoris", 12, 300000, "2024-12-01"));
-        */
         tree.tambahBarang("Elektronik", new Barang("A001", "Laptop", "Elektronik", 10, 7000000, "2024-12-01"));
         tree.tambahBarang("Furniture", new Barang("B002", "Meja Kantor", "Furniture", 5, 1500000, "2024-12-01"));
         tree.tambahBarang("Aksesoris", new Barang("D006", "Mouse", "Aksesoris", 25, 150000, "2024-12-01"));
@@ -327,86 +315,4 @@ public class Main {
             System.out.println("Barang dengan ID " + idBarang + " tidak ditemukan dalam antrian.");
         }
     }
-    /* 
-    private static void pengirimanBarang() {
-        while (true) { 
-            System.out.println("\n===========================");
-            System.out.println("     PENGIRIMAN BARANG");
-            System.out.println("===========================");
-            System.out.println("===========================");
-            System.out.println("1. Buat Pengiriman Barang");
-            System.out.println("2. Riwayat Pengirirman Barang");
-            // System.out.println("3. Cari Pengiriman Berdasarkan ID");
-            System.out.println("3. Kembali");
-            System.out.println("===========================");
-            System.out.print("Pilih menu: ");
-            int choice = scanner.nextInt();
-            scanner.nextLine(); // consume newline
-            switch (choice) {
-                case 1:
-                System.out.print("Masukkan ID Barang yang dikirim: ");
-                String idKirim = scanner.nextLine();
-                Barang barangKirim = barangList.searchById(idKirim);
-                if (barangKirim != null) {
-                    System.out.print("Masukkan jumlah barang yang dikirim: ");
-                    int jumlahKirim = scanner.nextInt();
-                    scanner.nextLine(); // consume newline
-                    tree.enqueue(barangKirim);
-
-                    if (barangKirim.jumlah_stok >= jumlahKirim) {
-                        barangKirim.jumlah_stok -= jumlahKirim; // Kurangi stok
-                        riwayatStack.push(new Barang(barangKirim.id, barangKirim.nama, barangKirim.kategori, jumlahKirim, barangKirim.harga_satuan, ""));
-                        System.out.println("Barang " + barangKirim.nama + " sejumlah " + jumlahKirim + " berhasil dikirim.");
-                    } else {
-                        System.out.println("Stok tidak mencukupi. Stok tersedia: " + barangKirim.jumlah_stok);
-                    }
-                } else {
-                    System.out.println("Barang dengan ID " + idKirim + " tidak ditemukan.");
-                }
-                tree.dequeue(barangkirim;)
-                break;
-                case 2:
-                riwayatStack.tampilkan();
-                    break;
-                case 3:
-                    return;
-                case 4:
-                    return; 
-                default:
-                    System.out.println("Pilihan tidak valid, coba lagi.");
-            }
-        }
-       
-        
-    }
-    */
-
-//    private static void penerimaanBarang() {
-//          while (true) {
-//             System.out.println("\n===========================");
-//             System.out.println("     PENERIMAAN BARANG");
-//             System.out.println("===========================");
-//             System.out.println("===========================");
-//             System.out.println("1. Tambah Barang Masuk");
-//             System.out.println("2. Riwayat penerimaan Barang");
-//             System.out.println("3. Kembali");
-//             System.out.println("===========================");
-//             System.out.print("Pilih menu: ");
-//             int choice = scanner.nextInt();
-//             scanner.nextLine(); 
-//             switch (choice) {
-//                 case 1:
-//                     tambahBarang();
-//                     break;
-//                 case 2:
-//                     break;
-//                 case 3:
-//                     return;
-//                 default:
-//                     System.out.println("Pilihan tidak valid, coba lagi.");
-//             }
-//         }
-       
-//     }
-}
-
+} 
