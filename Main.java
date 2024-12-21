@@ -5,15 +5,15 @@ public class Main {
     static Scanner scanner = new Scanner(System.in);
     static LinkedList barangList = new LinkedList();
     static Stack riwayatStack = new Stack();
-    static Tree tree = new Tree();
+    static Tree tree = new Tree("Data Barang");
     static Queue pengirimanQueue = new Queue();
     public static void main(String[] args) {
        
 
-        tree.insertKategori("Elektronik");
-        tree.insertKategori("Furniture");
-        tree.insertKategori("Alat Tulis");
-        tree.insertKategori("Aksesoris");
+        tree.insertKategori("Data Barang", "Elektronik");
+        tree.insertKategori("Data Barang", "Furniture");
+        tree.insertKategori("Data Barang", "Alat Tulis");
+        tree.insertKategori("Data Barang", "Aksesoris");
         
         tree.tambahBarang("Elektronik", new Barang("A001", "Laptop", "Elektronik", 10, 7000000, "2024-12-01"));
         tree.tambahBarang("Furniture", new Barang("B002", "Meja Kantor", "Furniture", 5, 1500000, "2024-12-01"));
@@ -122,10 +122,8 @@ public class Main {
     private static void editBarang() {
         System.out.print("Masukkan ID Barang yang akan diedit: ");
         String id = scanner.nextLine();
-    
         System.out.print("Masukkan Field yang akan diedit (nama, stok, tanggal): ");
         String field = scanner.nextLine();
-    
         Object newValue;
         switch (field.toLowerCase()) {
             case "nama":

@@ -4,18 +4,37 @@ public class Tree {
     public class Node {
         String kategori;
         LinkedList barangList;
-        Node left, right;
+        Node left, right, nextSibling, firstChild;
 
         Node(String kategori) {
             this.kategori = kategori;
             this.barangList = new LinkedList();
-            this.left = this.right = null;
+            this.left = this.right = this.nextSibling = this.firstChild = null;
         }
     }
-
     private Node root;
-
-    public void insertKategori(String kategori) {
+    
+    public Tree (String kategori){
+        this.root = new Node (kategori);
+    }
+    
+    public void insertKategori(String parentKategori, String childKategori) {
+        Node parentNode = searchKategori(parentKategori);
+        if (parentNode == null) {
+          System.out.println("Parent Kategori " + parentKategori + " tidak ditemukan!");
+          return;
+        }
+        if (parentNode.firstChild == null) {
+            parentNode.firstChild = new Node(childKategori);
+        } else {
+            Node sibling = parentNode.firstChild;
+            while (sibling.nextSibling != null){
+                sibling = sibling.nextSibling;
+            }
+            sibling.nextSibling = new Node(childKategori);
+        }
+      }
+    /*public void insertKategori(String kategori) {
         root = insertKategoriRecursive(root, kategori);
     }
 
@@ -32,7 +51,7 @@ public class Tree {
         }
 
         return root;
-    }
+    }*/
     
     public void tambahBarang(String kategori, Barang barang) {
         Node node = searchKategori(kategori); // Cari kategori berdasarkan nama
@@ -48,46 +67,46 @@ public class Tree {
         return searchKategoriRecursive(root, kategori);
     }
 
-    private Node searchKategoriRecursive(Node root, String kategori) {
-        if (root == null || root.kategori.equals(kategori)) {
-            return root;
+    private Node searchKategoriRecursive(Node node, String kategori) {
+        if (node == null ) {
+            return null;
         }
-        if (kategori.compareTo(root.kategori) < 0) {
-            return searchKategoriRecursive(root.left, kategori);
+        if (node.kategori.equals(kategori)){
+            return node;
         }
-        return searchKategoriRecursive(root.right, kategori);
+        Node found = searchKategoriRecursive(node.firstChild, kategori);
+        if (found != null) {
+            return found;
+        }
+        return searchKategoriRecursive(node.nextSibling, kategori);
     }
 
     public void hapusBarang(String id) {
         hapusBarangRecursive(root, id);
     }
 
-    private void hapusBarangRecursive(Node root, String id) {
-        if (root == null) {
+    private void hapusBarangRecursive(Node node, String id) {
+        if (node == null) {
             return;
         }
-        root.barangList.hapus(id);
-        hapusBarangRecursive(root.left, id);
-        hapusBarangRecursive(root.right, id);
+        node.barangList.hapus(id);
+        hapusBarangRecursive(node.firstChild, id);
+        hapusBarangRecursive(node.nextSibling, id);
     }
 
     public void updateBarang(String id, String field, Object newValue) {
         updateBarangRecursive(root, id, field, newValue);
     }
 
-    private void updateBarangRecursive(Node root, String id, String field, Object newValue) {
-        if (root == null) {
+    private void updateBarangRecursive(Node node, String id, String field, Object newValue) {
+        if (node == null) {
         throw new NoSuchElementException("ID Barang tidak ditemukan.");
         }
         try {
-        root.barangList.update(id, field, newValue);
+            node.barangList.update(id, field, newValue);
         } catch (NoSuchElementException e) {
-            if (root.left != null) {
-            updateBarangRecursive(root.left, id, field, newValue);
-            }
-            if (root.right != null) {
-            updateBarangRecursive(root.right, id, field, newValue);
-            }
+            updateBarangRecursive(node.firstChild, id, field, newValue); 
+            updateBarangRecursive(node.nextSibling, id, field, newValue);
         }
     }
 
@@ -95,12 +114,13 @@ public class Tree {
         displayRecursive(root);
     }
 
-    private void displayRecursive(Node root) {
-        if (root != null) {
+    private void displayRecursive(Node node) {
+        if (node != null) {
             displayRecursive(root.left);
-            System.out.println("Kategori: " + root.kategori);
-            root.barangList.tampilkan();
-            displayRecursive(root.right);
+            System.out.println("Kategori: " + node.kategori);
+            node.barangList.tampilkan();
+            displayRecursive(node.firstChild); 
+            displayRecursive(node.nextSibling);
         }
     }
 
@@ -118,21 +138,21 @@ public class Tree {
         return cariBarangByIdRecursive(root, id);
     }
     
-    private Barang cariBarangByIdRecursive(Node root, String id) {
-        if (root == null) {
+    private Barang cariBarangByIdRecursive(Node node, String id) {
+        if (node == null) {
             return null;
         }
     
-        Barang found = root.barangList.searchById(id);
+        Barang found = node.barangList.searchById(id);
         if (found != null) {
             return found;
         }
     
-        found = cariBarangByIdRecursive(root.left, id);
-        if (found != null) {
-            return found;
+        Barang foundInChild= cariBarangByIdRecursive(node.firstChild, id);
+        if (foundInChild != null) {
+            return foundInChild;
         }
     
-        return cariBarangByIdRecursive(root.right, id);
+        return cariBarangByIdRecursive(node.nextSibling, id);
     }
 }
