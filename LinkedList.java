@@ -1,6 +1,6 @@
 public class LinkedList {
     private Node head;
-    private boolean isSorted = false;
+    // private boolean isSorted = false;
 
     public void tambah(Barang barang) {
         Node newNode = new Node(barang);
@@ -184,16 +184,16 @@ public class LinkedList {
         return null;
     }
 */
-    private Node[] toArray() {
-        int size = getSize();
-        Node[] array = new Node[size];
-        Node current = head;
-        for (int i = 0; i < size; i++) {
-            array[i] = current;
-            current = current.next;
-        }
-        return array;
-    }
+    // private Node[] toArray() {
+    //     int size = getSize();
+    //     Node[] array = new Node[size];
+    //     Node current = head;
+    //     for (int i = 0; i < size; i++) {
+    //         array[i] = current;
+    //         current = current.next;
+    //     }
+    //     return array;
+    // }
 
     public Barang searchById(String id) {
         Node current = head;

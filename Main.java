@@ -53,6 +53,7 @@ public class Main {
         
     }
     private static void showMainMenu() {
+        
         System.out.println("===========================");
         System.out.println("        STOCK TRACK");
         System.out.println("===========================");
